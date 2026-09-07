@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "room-intrusion-detector.fullname" . }}-service
+  labels:
+    app: {{ include "room-intrusion-detector.fullname" . }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "room-intrusion-detector.fullname" . }}
+  ports:
+    - protocol: TCP
+      port: 80         # Port exposed internally to the cluster
+      targetPort: 8000 # Port FastAPI/Uvicorn is listening on

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: room-intrusion-detector
+description: A Helm chart for AI-based room video intrusion detection using Data Fabric event streams and S3 storage
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

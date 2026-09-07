@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: deepstream-pods, namespace: video-ai }
+spec:
+  replicas: 1 # one pod per GPU; shard CAMERAS per pod
+  selector: { matchLabels: { app: deepstream } }
+  template:
+    metadata: { labels: { app: deepstream } }
+    spec:
+      hostNetwork: true # RTSP from node LAN
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccountName: video-ai-sa # IRSA for S3
+      nodeSelector: { accelerator: nvidia-gpu }
+      tolerations:
+        - { key: nvidia.com/gpu, operator: Exists, effect: NoSchedule }
+      containers:
+        - name: deepstream
+          image: nvcr.io/nvidia/deepstream:9.1-triton-multiarch # NGC image, SDK preinstalled
+          command: ["python3", "/app/deepstream_app.py"]
+          env:
+            - { name: KAFKA_CONN, value: "b-1.msk...:9098;detections" }
+            - { name: S3_BUCKET, value: "video-archive" }
+          resources:
+            limits: { nvidia.com/gpu: "1", memory: 8Gi }
+          volumeMounts:
+            - { name: models, mountPath: /app, readOnly: true }
+      volumes:
+        - name: models
+          configMap: { name: deepstream-app } # app.py + pgie config + labels.txt
