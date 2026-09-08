@@ -10,7 +10,7 @@ archiver:
     region: "us-east-1"
   resources:
     limits:
-      cpu: 1000m
+      cpu: 500m
       memory: 1Gi
       nvidia.com/gpu: "0"
     requests:
