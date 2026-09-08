@@ -20,9 +20,9 @@ jobs:
       matrix:
         include:
           - image: tessarine/intrusion-detector
-            dockerfile: detector/Dockerfile
+            dockerfile: ./detector/Dockerfile
           - image: tessarine/intrusion-archiver
-            dockerfile: archiver/Dockerfile
+            dockerfile: ./archiver/Dockerfile
 
     steps:
       - name: Checkout
