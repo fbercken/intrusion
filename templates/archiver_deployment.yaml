@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "intrusion.fullname" . }}-archiver
+  labels:
+    app: {{ include "intrusion.fullname" . }}-archiver
+spec:
+  replicas: {{ .Values.archiver.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "intrusion.fullname" . }}-archiver
+  template:
+    metadata:
+      labels:
+        app: {{ include "intrusion.fullname" . }}-archiver
+    spec:
+      containers:
+        - name: archiver
+          image: "{{ .Values.archiver.image }}:{{ .Values.archiver.tag }}"
+          imagePullPolicy: {{ .Values.archiver.pullPolicy }}
+          args: ["python3", "video_archiver.py"]
+          envFrom:
+            - configMapRef:
+                name: {{ include "intrusion.fullname" . }}-archiver-config
+            - secretRef:
+                name: {{ include "intrusion.fullname" . }}-s3-secret
+          resources:
+            {{- toYaml .Values.archiver.resources | nindent 12 -}}

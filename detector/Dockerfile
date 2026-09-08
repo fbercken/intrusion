@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM nvcr.io/nvidia/deepstream:9.1-triton-multiarch
 
 WORKDIR /app
 
@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ .
 
-EXPOSE 8000
+ENV NVIDIA_DRIVER_CAPABILITIES=${NVIDIA_DRIVER_CAPABILITIES},video
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+
+ENTRYPOINT ["python3", "video_archiver.py"]

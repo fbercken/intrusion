@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "intrusion.fullname" . }}-detector
+  labels:
+    app: {{ include "intrusion.fullname" . }}-detector
+spec:
+  replicas: {{ .Values.detector.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "intrusion.fullname" . }}-detector
+  template:
+    metadata:
+      labels:
+        app: {{ include "intrusion.fullname" . }}-detector
+    spec:
+      containers:
+        - name: detecttor
+          image: "{{ .Values.detector.image }}:{{ .Values.detector.tag }}"
+          imagePullPolicy: {{ .Values.detector.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          # Ensure correct uvicorn command format without .py
+          args: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+          env:
+            - name: CAMERA_STREAM_URL
+              value: "http://127.0.0.1:9000/video"
+          envFrom:
+            - configMapRef:
+                name: {{ include "intrusion.fullname" . }}-detector-config
+            - secretRef:
+                name: {{ include "intrusion.fullname" . }}-s3-secret
+          resources:
+            {{- toYaml .Values.detector.resources | nindent 12 -}}

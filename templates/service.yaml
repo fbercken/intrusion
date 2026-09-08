@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "room-intrusion-detector.fullname" . }}-service
+  name: {{ include "intrusion.fullname" . }}-service
   labels:
-    app: {{ include "room-intrusion-detector.fullname" . }}
+    app: {{ include "intrusion.fullname" . }}
 spec:
   type: ClusterIP
   selector:
-    app: {{ include "room-intrusion-detector.fullname" . }}
+    app: {{ include "intrusion.fullname" . }}
   ports:
     - protocol: TCP
       port: 80         # Port exposed internally to the cluster

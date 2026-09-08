@@ -1,9 +1,9 @@
 import os, time, pathlib
 import json
-#import boto3
+import boto3
 import threading
 from typing import Dict, List
-#from botocore.config import Config
+from botocore.config import Config
 
 
 # S3 Data Fabric Configurations
@@ -31,21 +31,20 @@ class S3Archiver(threading.Thread):
 
     def connect(self, endPoint: str | None, accessKey: str, secretKey: str):
 
-        #self._s3_client = boto3.client(
-        #    's3',
-        #    endpoint_url=endPoint,
-        #    aws_access_key_id=accessKey,
-        #    aws_secret_access_key=secretKey,
-        #    config=Config(signature_version='s3v4', s3={'addressing_style': 'path'})
-        #)
-        pass
+        self._s3_client = boto3.client(
+            's3',
+            endpoint_url=endPoint,
+            aws_access_key_id=accessKey,
+            aws_secret_access_key=secretKey,
+            config=Config(signature_version='s3v4', s3={'addressing_style': 'path'})
+        )
 
     def run(self):
         while True:
             for f in self.sourceDirectory.glob("*.mp4"):
                 if time.time() - f.stat().st_mtime > 60:
                     key = f"{self.prefix}/{f.name.split('_')[0]}/{f.name}"
-                    #self._s3_client.upload_file(str(f), self.bucket, key)
+                    self._s3_client.upload_file(str(f), self.bucket, key)
                     print(key)
                     f.unlink()
             time.sleep(15)
@@ -53,7 +52,6 @@ class S3Archiver(threading.Thread):
 
 def main():
     myS3Archiver = S3Archiver(S3_ARCHIVER, SRC_FOLDER,  S3_BUCKET, S3_PREFIX)
-
     myS3Archiver.connect(S3_ENDPOINT, ACCESS_KEY_ID , SECRET_KEY)
     myS3Archiver.start()
     myS3Archiver.join()
