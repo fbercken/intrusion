@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ matrix.image }}
+          images: ${{ matrix.image }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
