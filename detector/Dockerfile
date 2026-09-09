@@ -4,8 +4,12 @@ WORKDIR /app
 
 # Install system utilities and cv2 prerequisites
 RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
+    gcc \
+    python3-dev \
+    libffi-dev \
+    libssl-dev \
+    #    libgl1 \
+    #    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY detector/requirements.txt .
