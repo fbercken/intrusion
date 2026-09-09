@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip, setuptools, and wheel to ensure smooth wheel buildin
-RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel --break-system-packages
+# Upgrade pip, setuptools, and wheel to ensure smooth wheel building
+# RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel --break-system-packages
 
 # Install kafka-python separately
 RUN pip3 install --no-cache-dir kafka-python --break-system-packages
