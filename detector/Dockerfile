@@ -20,13 +20,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip, setuptools, and wheel to ensure smooth wheel building
-RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel --break-system-packages
 
 # Install kafka-python separately
-RUN pip3 install --no-cache-dir kafka-python
+RUN pip3 install --no-cache-dir kafka-python --break-system-packages
 
 # Install ultralytics and associated model tools
-RUN pip3 install --no-cache-dir ultralytics onnx numpy
+RUN pip3 install --no-cache-dir ultralytics onnx numpy --break-system-packages
 
 # Ensure proper video driver capabilities for runtime hardware acceleration
 ENV NVIDIA_DRIVER_CAPABILITIES=$NVIDIA_DRIVER_CAPABILITIES,video
