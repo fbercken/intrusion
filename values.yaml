@@ -1,6 +1,6 @@
 archiver:
   image: tessarine/intrusion-archiver
-  tag: "sha-a7bce8e"
+  tag: "main"
   replicatcount: 1
   pullPolicy: Always
   tmpfolder: "tmpvideo"
@@ -19,7 +19,7 @@ archiver:
 
 detector:
   image: tessarine/intrusion-detector
-  tag: "sha-a7bce8e"
+  tag: "main"
   replicatcount: 1
   pullPolicy: Always
   kafka:
