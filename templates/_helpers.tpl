@@ -1,3 +1,3 @@
-{{- define "room-intrusion-detector.fullname" -}}
+{{- define "intrusion.fullname" -}}
 {{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
