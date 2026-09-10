@@ -31,6 +31,8 @@ RUN pip3 install --no-cache-dir ultralytics onnx numpy --break-system-packages
 # Ensure proper video driver capabilities for runtime hardware acceleration
 ENV NVIDIA_DRIVER_CAPABILITIES=$NVIDIA_DRIVER_CAPABILITIES,video
 
+COPY detector/app/ .
+
 # Set working directory inside the container
 WORKDIR /opt/app
 
