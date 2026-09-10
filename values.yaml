@@ -1,8 +1,8 @@
 archiver:
-  image: tessarine/archiver
+  image: tessarine/intrusion-archiver
   tag: "sha-a7bce8e"
   replicatcount: 1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tmpfolder: "tmpvideo"
   s3:
     endpointUrl: "https://datafabric01.ezmeral.demo.hpelabs.fr:9000"
@@ -18,10 +18,10 @@ archiver:
       memory: 1Gi
 
 detector:
-  image: tessarine/injector
+  image: tessarine/intrusion-detector
   tag: "sha-a7bce8e"
   replicatcount: 1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   kafka:
     bootstrapServers: "datafabric01.ezmeral.demo.hpelabs.fr:9092"
     topic: "object-events"
