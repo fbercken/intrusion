@@ -1,7 +1,7 @@
 archiver:
   image: tessarine/intrusion-archiver
   tag: "main"
-  replicatcount: "1"
+  replicatcount: 1
   pullPolicy: Always
   tmpfolder: "tmpvideo"
   s3:
@@ -20,7 +20,7 @@ archiver:
 detector:
   image: tessarine/intrusion-detector
   tag: "main"
-  replicatcount: "1"
+  replicatcount: 1
   pullPolicy: Always
   kafka:
     bootstrapServers: "datafabric01.ezmeral.demo.hpelabs.fr:9092"
