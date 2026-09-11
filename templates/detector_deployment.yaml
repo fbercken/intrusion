@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ include "intrusion.fullname" . }}-detector
 spec:
-  replicas: {{ .Values.detector.replicaCount }}
+  replicas: {{ .Values.detector.replicatcount }}
   selector:
     matchLabels:
       app: {{ include "intrusion.fullname" . }}-detector
