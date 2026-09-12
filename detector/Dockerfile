@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies, native Kafka libraries, and OpenCV UI prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    procps wget curl net-tools iputils-ping  dnsutils :wqvim-tiny less jq ca-certificates \
+    procps wget curl net-tools iputils-ping  dnsutils vim-tiny less jq ca-certificates \
     python3-pip \
     python3-dev \
     build-essential \
