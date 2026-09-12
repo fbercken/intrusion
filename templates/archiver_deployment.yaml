@@ -14,6 +14,10 @@ spec:
       labels:
         app: {{ include "intrusion.fullname" . }}-archiver
     spec:
+      volumes:
+        - name: ca-cert                 
+          configMap:
+            name: {{ include "intrusion.fullname" . }}-s3
       containers:
         - name: archiver
           image: "{{ .Values.archiver.image }}:{{ .Values.archiver.tag }}"
@@ -35,7 +39,3 @@ spec:
               readOnly: true
           resources:
             {{- toYaml .Values.archiver.resources | nindent 12 -}}
-      volumes:
-        - name: ca-cert                 
-          configMap:
-            name: {{ include "intrusion.fullname" . }}-s3
