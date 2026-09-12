@@ -3,6 +3,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
+    procps wget curl net-tools iputils-ping  dnsutils :wqvim-tiny less jq ca-certificates \
     gcc \
     python3-dev \
     libffi-dev \
