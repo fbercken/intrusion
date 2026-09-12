@@ -3,6 +3,7 @@ import json
 from kafka import KafkaProducer
 
 
+
 BOOTSTRAP_SERVERS="9092"
 
 def initialize_producer():
