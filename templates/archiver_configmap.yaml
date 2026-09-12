@@ -7,4 +7,6 @@ data:
   S3_ENDPOINT_URL: {{ .Values.archiver.s3.endpointUrl | quote }}
   S3_BUCKET_NAME: {{ .Values.archiver.s3.bucket | quote }}
   S3_REGION: {{ .Values.archiver.s3.region | quote }}
+  ca.crt: |
+    {{ .Values.archiver.caCert | indent 4 }}
       

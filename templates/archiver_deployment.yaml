@@ -24,5 +24,18 @@ spec:
                 name: {{ include "intrusion.fullname" . }}-archiver-config
             - secretRef:
                 name: {{ include "intrusion.fullname" . }}-s3-secret
+          env:                        
+            - name: SSL_CERT_FILE        # openssl/urllib3/pip honor this
+              value: /etc/ssl/custom/ca.crt
+            - name: AWS_CA_BUNDLE        # boto3/S3 clients honor this
+              value: /etc/ssl/custom/ca.crt
+          volumeMounts:
+            - mountPath: /etc/ssl/custom    mounts the whole configmap
+              name: ca-cert
+              readOnly: true
           resources:
             {{- toYaml .Values.archiver.resources | nindent 12 -}}
+      volumes:
+        - name: ca-cert                 
+          configMap:
+            name: {{ include "intrusion.fullname" . }}-s3

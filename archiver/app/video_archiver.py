@@ -13,7 +13,7 @@ ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID","")
 SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY","")
 S3_BUCKET = os.getenv("S3_BUCKET_NAME","video_archive")
 S3_PREFIX = os.getenv("S3_PRREFIX","test")
-SRC_FOLDER = os.getenv("SRC_FOLDER","tmp")
+SRC_FOLDER = os.getenv("SRC_FOLDER","/tmp")
 
 
 class S3Archiver(threading.Thread):

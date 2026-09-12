@@ -3,10 +3,10 @@ archiver:
   tag: "main"
   replicatcount: 1
   pullPolicy: Always
-  tmpfolder: "tmpvideo"
+  tmpfolder: "/tmp"
   s3:
     endpointUrl: "https://datafabric01.ezmeral.demo.hpelabs.fr:9000"
-    bucket: "video_archive"
+    bucket: "video-archive"
     region: "us-east-1"
   resources:
     limits:
@@ -33,6 +33,7 @@ detector:
     requests:
       cpu: 500m
       memory: 1Gi
+
 
 env:
   roomName: "Server-Room-04"
