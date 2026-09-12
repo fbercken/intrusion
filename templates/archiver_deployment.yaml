@@ -33,6 +33,10 @@ spec:
               value: /etc/ssl/custom/ca.crt
             - name: AWS_CA_BUNDLE
               value: /etc/ssl/custom/ca.crt
+            - name: AWS_REQUEST_CHECKSUM_CALCULATION
+              value: "when_required"
+            - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+              value: "when_required"
           volumeMounts:
             - mountPath: /etc/ssl/custom
               name: ca-cert
