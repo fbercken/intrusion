@@ -29,12 +29,12 @@ spec:
             - secretRef:
                 name: {{ include "intrusion.fullname" . }}-s3-secret
           env:                        
-            - name: SSL_CERT_FILE        # openssl/urllib3/pip honor this
+            - name: SSL_CERT_FILE
               value: /etc/ssl/custom/ca.crt
-            - name: AWS_CA_BUNDLE        # boto3/S3 clients honor this
+            - name: AWS_CA_BUNDLE
               value: /etc/ssl/custom/ca.crt
           volumeMounts:
-            - mountPath: /etc/ssl/custom    mounts the whole configmap
+            - mountPath: /etc/ssl/custom
               name: ca-cert
               readOnly: true
           resources:
