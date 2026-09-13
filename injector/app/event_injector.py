@@ -23,7 +23,9 @@ def main():
     print(f"Producing messages to HPE Data Fabric via kafka-python [Topic: {KAFKA_TOPIC}]...")
 
     try:
-        for i in range(10):
+        i = 0
+        while True:
+        #for i in range(10):
             payload = {
                 'event_id': i,
                 'status': 'active', 
@@ -32,11 +34,11 @@ def main():
             
             # Send message asynchronously
             message_bytes = json.dumps(payload).encode('utf-8')
-            future = producer.send(KAFKA_TOPIC, value=message_bytes)
+            #future = producer.send(KAFKA_TOPIC, value=message_bytes)
             
             # Block briefly for confirmation to ensure delivery
-            record_metadata = future.get(timeout=10)
-            print(f"Delivered to [Partition: {record_metadata.partition}, Offset: {record_metadata.offset}]")
+            #record_metadata = future.get(timeout=10)
+            #print(f"Delivered to [Partition: {record_metadata.partition}, Offset: {record_metadata.offset}]")
             
             time.sleep(1)
 

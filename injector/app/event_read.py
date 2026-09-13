@@ -23,7 +23,7 @@ def main():
 
     consumer.subscribe(topics=[KAFKA_TOPIC])
     numMsgConsumed = 0
-    for _ in range(10):
+    for _ in range(100):
         records = consumer.poll(timeout_ms=500)
         for topic_data, consumer_records in records.items():
             for consumer_record in consumer_records:
