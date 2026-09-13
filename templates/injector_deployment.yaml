@@ -14,10 +14,6 @@ spec:
       labels:
         app: {{ include "intrusion.fullname" . }}-injector
     spec:
-      volumes:
-        - name: ca-cert                 
-          configMap:
-            name: {{ include "intrusion.fullname" . }}-s3
       containers:
         - name: injector
           image: "{{ .Values.injector.image }}:{{ .Values.injector.tag }}"
@@ -27,18 +23,5 @@ spec:
                 name: {{ include "intrusion.fullname" . }}-injector-config
             - secretRef:
                 name: {{ include "intrusion.fullname" . }}-s3-secret
-          env:                        
-            - name: SSL_CERT_FILE
-              value: /etc/ssl/custom/ca.crt
-            - name: AWS_CA_BUNDLE
-              value: /etc/ssl/custom/ca.crt
-            - name: AWS_REQUEST_CHECKSUM_CALCULATION
-              value: "when_required"
-            - name: AWS_RESPONSE_CHECKSUM_VALIDATION
-              value: "when_required"
-          volumeMounts:
-            - mountPath: /etc/ssl/custom
-              name: ca-cert
-              readOnly: true
           resources:
             {{- toYaml .Values.injector.resources | nindent 12 -}}
