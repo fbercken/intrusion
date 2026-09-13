@@ -19,7 +19,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "intrusion.fullname" . }}-pvc 
       containers:
-        - name: detecttor
+        - name: detector
           image: "{{ .Values.detector.image }}:{{ .Values.detector.tag }}"
           imagePullPolicy: {{ .Values.detector.pullPolicy }}
           ports:

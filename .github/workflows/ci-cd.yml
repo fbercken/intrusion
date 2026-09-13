@@ -23,7 +23,8 @@ jobs:
             dockerfile: ./detector/Dockerfile
           - image: tessarine/intrusion-archiver
             dockerfile: ./archiver/Dockerfile
-
+          - image: tessarine/intrusion-injector
+            dockerfile: ./injector/Dockerfile
     steps:
       - name: Checkout
         uses: actions/checkout@v4
