@@ -19,7 +19,7 @@ spec:
           configMap:
             name: {{ include "intrusion.fullname" . }}-s3
       containers:
-        - name: archiver
+        - name: injector
           image: "{{ .Values.injector.image }}:{{ .Values.injector.tag }}"
           imagePullPolicy: {{ .Values.injector.pullPolicy }}
           envFrom:
