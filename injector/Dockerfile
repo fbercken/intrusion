@@ -23,4 +23,4 @@ RUN pip install --upgrade pip wheel setuptools \
 COPY injector/app/ .
 
 
-CMD ["python3", "evvent_injector.py"]
+CMD ["python3", "event_injector.py"]
