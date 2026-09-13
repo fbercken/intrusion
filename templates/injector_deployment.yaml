@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "intrusion.fullname" . }}-injector
   labels:
-    app: {{ include "intrusion.fullname" . }}-innjector
+    app: {{ include "intrusion.fullname" . }}-i   njector
 spec:
   replicas: {{ .Values.injector.replicatcount }}
   selector:
