@@ -3,19 +3,21 @@ import json
 import time
 from kafka import KafkaProducer
 
-KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS","")
-KAFKA_TOPIC = os.getenv("KAFKA_TOPIC","")
+KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS","datafabric01.ezmeral.demo.hpelabs.fr:9092")
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC","video-event")
 
 def main():
     # Initialize the kafka-python producer pointing to the Data Fabric Kafka gateway
+    print(f"Open Producer {KAFKA_BOOTSTRAP_SERVERS}  topic: {KAFKA_TOPIC}")
+
     producer = KafkaProducer(
-        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS, 
-        value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-        # Optional: Add security configs here if SASL/SSL is enabled on your cluster
-        # security_protocol='SASL_PLAINTEXT',
-        # sasl_mechanism='PLAIN',
-        # sasl_plain_username='your_user',
-        # sasl_plain_password='your_password'
+        bootstrap_servers=[KAFKA_BOOTSTRAP_SERVERS],
+        enable_idempotence=False,
+        api_version=(3, 6, 0),
+        security_protocol='SASL_PLAINTEXT',
+        sasl_mechanism='PLAIN',
+        sasl_plain_username='mapr', 
+        sasl_plain_password='mapr'
     )
 
     print(f"Producing messages to HPE Data Fabric via kafka-python [Topic: {KAFKA_TOPIC}]...")
@@ -24,12 +26,13 @@ def main():
         for i in range(10):
             payload = {
                 'event_id': i,
-                'status': 'active',
+                'status': 'active', 
                 'timestamp': time.time()
             }
             
             # Send message asynchronously
-            future = producer.send(KAFKA_TOPIC, value=payload)
+            message_bytes = json.dumps(payload).encode('utf-8')
+            future = producer.send(KAFKA_TOPIC, value=message_bytes)
             
             # Block briefly for confirmation to ensure delivery
             record_metadata = future.get(timeout=10)

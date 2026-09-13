@@ -25,7 +25,7 @@ detector:
   tmpfolder: "/tmp/videos"
   kafka:
     bootstrapServers: "datafabric01.ezmeral.demo.hpelabs.fr:9092"
-    topic: "object-events"
+    topic: "video-events"
   resources:
     limits:
       cpu: 2000m
@@ -42,7 +42,7 @@ injector:
   pullPolicy: Always
   kafka:
     bootstrapServers: "datafabric01.ezmeral.demo.hpelabs.fr:9092"
-    topic: "object-events"
+    topic: "video-events"
   resources:
     limits:
       cpu: 2000m
