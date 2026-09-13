@@ -18,6 +18,9 @@ spec:
         - name: ca-cert                 
           configMap:
             name: {{ include "intrusion.fullname" . }}-s3
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ include "intrusion.fullname" . }}-pvc 
       containers:
         - name: archiver
           image: "{{ .Values.archiver.image }}:{{ .Values.archiver.tag }}"
@@ -41,5 +44,7 @@ spec:
             - mountPath: /etc/ssl/custom
               name: ca-cert
               readOnly: true
+            - mountPath: /tmp/videos
+              name: shared-storage 
           resources:
             {{- toYaml .Values.archiver.resources | nindent 12 -}}

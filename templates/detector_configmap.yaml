@@ -5,6 +5,7 @@ metadata:
 data:
   ROOM_NAME: {{ .Values.env.roomName | quote }}
   CAMERA_RTSP_URL: {{ .Values.env.cameraRTSPUrl | quote }}
+  SRC_FOLDER: {{ .Values.archiver.tmpfolder | quote }}
   KAFKA_BOOTSTRAP_SERVERS: {{ .Values.detector.kafka.bootstrapServers | quote }}
   KAFKA_TOPIC: {{ .Values.detector.kafka.topic | quote }}
   CONFIDENCE_THRESHOLD: {{ .Values.env.confidenceThreshold | quote }}
