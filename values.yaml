@@ -3,7 +3,7 @@ archiver:
   tag: "main"
   replicatcount: 1
   pullPolicy: Always
-  tmpfolder: "/tmp/video"
+  tmpfolder: "/tmp/videos"
   s3:
     endpointUrl: "https://datafabric01.ezmeral.demo.hpelabs.fr:9000"
     bucket: "video-archive"
@@ -22,7 +22,7 @@ detector:
   tag: "main"
   replicatcount: 1
   pullPolicy: Always
-  tmpfolder: "/tmp/video"
+  tmpfolder: "/tmp/videos"
   kafka:
     bootstrapServers: "datafabric01.ezmeral.demo.hpelabs.fr:9092"
     topic: "object-events"
