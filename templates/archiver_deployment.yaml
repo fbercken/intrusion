@@ -25,7 +25,6 @@ spec:
         - name: archiver
           image: "{{ .Values.archiver.image }}:{{ .Values.archiver.tag }}"
           imagePullPolicy: {{ .Values.archiver.pullPolicy }}
-          args: ["python3", "video_archiver.py"]
           envFrom:
             - configMapRef:
                 name: {{ include "intrusion.fullname" . }}-archiver-config
