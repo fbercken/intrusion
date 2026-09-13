@@ -42,4 +42,4 @@ spec:
               name: ca-cert
               readOnly: true
           resources:
-            {{- toYaml .Values.innjector.resources | nindent 12 -}}
+            {{- toYaml .Values.injector.resources | nindent 12 -}}
