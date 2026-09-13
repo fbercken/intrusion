@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ include "intrusion.fullname" . }}-injector-config
 data:
-  KAFKA_BOOTSTRAP_SERVERS: {{ .Values.innjector.kafka.bootstrapServers | quote }}
+  KAFKA_BOOTSTRAP_SERVERS: {{ .Values.injector.kafka.bootstrapServers | quote }}
   KAFKA_TOPIC: {{ .Values.injector.kafka.topic | quote }}
       
