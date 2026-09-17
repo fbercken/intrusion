@@ -57,4 +57,4 @@ injector:
 env:
   roomName: "Server-Room-04"
   cameraRTSPUrl: "rtsp://camera-device-ip:554/stream1"
-  confidenceThreshold: "0.75"
+  confidenceThreshold: "0.70"
