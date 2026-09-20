@@ -6,6 +6,9 @@ FROM nvcr.io/nvidia/deepstream:9.1-triton-multiarch
 # Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set working directory inside the container
+WORKDIR /app
+
 # Install system dependencies, native Kafka libraries, and OpenCV UI prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps wget net-tools iputils-ping  dnsutils vim-tiny less jq ca-certificates \
@@ -34,8 +37,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES=$NVIDIA_DRIVER_CAPABILITIES,video
 
 COPY detector/app/ .
 
-# Set working directory inside the container
-WORKDIR /opt/app
 
 # Default command or entrypoint
-CMD ["/bin/bash"]
+CMD ["python3", "app.py"]

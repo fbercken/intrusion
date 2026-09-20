@@ -8,7 +8,7 @@ KAFKA_TOPIC = os.getenv("KAFKA_TOPIC","video-event")
 
 def main():
     # Initialize the kafka-python producer pointing to the Data Fabric Kafka gateway
-    print(f"Open Producer {KAFKA_BOOTSTRAP_SERVERS}  topic: {KAFKA_TOPIC}")
+    print(f"Open Consumer {KAFKA_BOOTSTRAP_SERVERS}  topic: {KAFKA_TOPIC}")
 
     consumer = KafkaConsumer(
         bootstrap_servers=[KAFKA_BOOTSTRAP_SERVERS],                
